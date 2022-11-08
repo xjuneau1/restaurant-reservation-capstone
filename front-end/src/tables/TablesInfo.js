@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { finishTableReservation, updateReservationStatus } from "../utils/api";
-import "./tablesinfo.css";
+import "./tables.css";
 function TablesInfo({ table, setError, index }) {
   const [currentTable, setCurrentTable] = useState(table);
   const history = useHistory();
@@ -47,7 +47,7 @@ function TablesInfo({ table, setError, index }) {
               onClick={handleFinishTable}
               data-table-id-finish={`${table.table_id}`}
               value={table.table_id}
-              className="table-button"
+              className="table-button-done"
             >
               Finish
             </button>
