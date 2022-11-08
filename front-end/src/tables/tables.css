@@ -1,0 +1,105 @@
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.table-card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.table-row {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+.table-row-1 {
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+}
+
+.table-data {
+    margin: 20px;
+}
+
+.table-button-done {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 3px 8px 3px 8px;
+    background-color: rgb(255, 56, 56);
+    color: white;
+    font-weight: 500;
+    transition: 300ms;
+}
+
+.table-button-done:hover {
+    border: 1px solid black;
+    color: black;
+}
+
+.table-button {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 3px 8px 3px 8px;
+    background-color: rgb(0, 140, 255);
+    color: white;
+    transition: 300ms;
+}
+
+.table-button:hover {
+    border: 1px solid black;
+    color: black;
+}
+
+.seat-reservation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.current-reservation-container-0 {
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+}
+
+.current-reservation-container-1 {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.current-reservation-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.seat-form {
+    display: flex;
+    justify-content: center;
+}
+
+.status-container {
+    display: flex;
+    margin: 10px;
+}
+.status-booked {
+    color: green;
+    margin-left: 5px;
+}
+
+.status-done {
+    color: red;
+    margin-left: 5px;
+}

@@ -3,6 +3,7 @@ import { listTables, updateSeat, getReservation } from "../utils/api";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import SeatTableForm from "./SeatTableForm";
 import ErrorAlert from "../layout/ErrorAlert";
+import "./tables.css";
 
 function SeatTable() {
   const initTableData = {
@@ -22,18 +23,20 @@ function SeatTable() {
   const { search } = useLocation();
   if (search) {
     date = search.replace("?date=", "");
-    console.log(date)
+    console.log(date);
   }
 
   useEffect(() => {
-    async function loadTables(){
+    async function loadTables() {
       const abortController = new AbortController();
       setError(null);
-      setCurrentReservation(await getReservation(reservation_id, abortController.signal))
-      setTables(await listTables(abortController.signal))
+      setCurrentReservation(
+        await getReservation(reservation_id, abortController.signal)
+      );
+      setTables(await listTables(abortController.signal));
       return () => abortController.abort();
     }
-    loadTables()
+    loadTables();
   }, [reservation_id]);
 
   const submitHandler = async (event) => {
@@ -45,7 +48,7 @@ function SeatTable() {
         parseInt(tableData.table_id),
         abortController.signal
       );
-      console.log(updatedTable)
+      console.log(updatedTable);
       history.push(`/dashboard?date=${currentReservation.reservation_date}`);
     } catch (error) {
       setError(error);
@@ -55,45 +58,59 @@ function SeatTable() {
 
   if (currentReservation.status === "booked") {
     return (
-      <>
+      <div className="seat-reservation-container">
         <ErrorAlert error={error} />
         <h3>Seat the reservation:</h3>
-        <br></br>
-        <span>Current Reservation:</span>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PHONE</th>
-              <th>DATE</th>
-              <th>TIME</th>
-              <th>PEOPLE</th>
-              <th>STATUS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{currentReservation.reservation_id}</td>
-              <td>
-                {currentReservation.first_name} {currentReservation.last_name}
-              </td>
-              <td>{currentReservation.mobile_number}</td>
-              <td>{currentReservation.reservation_date}</td>
-              <td>{currentReservation.reservation_time}</td>
-              <td>{currentReservation.people}</td>
-              <td>{currentReservation.status}</td>
-            </tr>
-          </tbody>
-        </table>
-        <SeatTableForm
-          tables={tables}
-          tableData={tableData}
-          setTableData={setTableData}
-          submitHandler={submitHandler}
-          history={history}
-        />
-      </>
+        <div className="current-reservation-container-0">
+          <h6>Current Reservation:</h6>
+
+          <div className="current-reservation-container-1">
+            <div className="current-reservation-row margin-10">
+              id: {currentReservation.reservation_id}
+            </div>
+            <div className="current-reservation-row">
+              <div className="margin-10">
+                Name: {currentReservation.first_name}{" "}
+                {currentReservation.last_name}
+              </div>
+              <div className="margin-10">
+                Phone: {currentReservation.mobile_number}
+              </div>
+              <div className="margin-10">
+                Date: {currentReservation.reservation_date}
+              </div>
+            </div>
+            <div className="current-reservation-row">
+              <div className="margin-10">
+                Time: {currentReservation.reservation_time}
+              </div>
+              <div className="margin-10">
+                Party Size: {currentReservation.people}
+              </div>
+              <div className="status-container">
+                Status:{" "}
+                <div
+                  className={
+                    currentReservation.status === "booked"
+                      ? "status-booked"
+                      : "status-done"
+                  }
+                >
+                  {currentReservation.status}
+                </div>
+              </div>
+            </div>
+
+            <SeatTableForm
+              tables={tables}
+              tableData={tableData}
+              setTableData={setTableData}
+              submitHandler={submitHandler}
+              history={history}
+            />
+          </div>
+        </div>
+      </div>
     );
   } else {
     return <></>;

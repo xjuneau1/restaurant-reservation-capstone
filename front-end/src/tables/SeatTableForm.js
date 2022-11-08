@@ -5,16 +5,17 @@ function SeatTableForm({ tables ,tableData, setTableData, submitHandler, history
         setTableData({ [target.name]: target.value });
       };
     return ( 
-        <>
-            <form onSubmit={submitHandler}>
+        <div className="margin-10">
+            <form className='seat-form' onSubmit={submitHandler}>
                 <div>
-                    <label>
-                        Select Table
+                    <label className="margin-right-5">
+                        Select Table:
                     </label>
                     <select
                         name="table_id"
                         id="table_id"
                         onChange={changeHandler}
+                        className="margin-right-5"
                     >
                         <option>Table Name - Capacity</option>
                         {tables.map((table)=> 
@@ -28,10 +29,10 @@ function SeatTableForm({ tables ,tableData, setTableData, submitHandler, history
                         )}
                     </select>
                 </div>
-                <button type='submit'>Submit</button>
-                <button type='button' onClick={()=> history.goBack()}>Cancel</button>
+                <button className='table-button margin-right-5' type='submit'>Submit</button>
+                <button className='table-button-done' type='button' onClick={()=> history.goBack()}>Cancel</button>
             </form>
-        </>
+        </div>
      );
 }
 
