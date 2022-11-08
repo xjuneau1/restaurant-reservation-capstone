@@ -9,12 +9,12 @@ function TablesForm({table, setTable, submitHandler, cancelHandler}) {
         setTable({ ...table, [target.name]: Number(target.value) });
       };
     return ( 
-        <div>
-            <h2>Create a new table:</h2>
+        <div className='table-form'>
             <form onSubmit={submitHandler}>
                 <label>
                     Table Name:
                     <input
+                    className='margin-right-5'
                     onChange={changeHandler}
                     value={table.table_name}
                     type="text"
@@ -27,6 +27,7 @@ function TablesForm({table, setTable, submitHandler, cancelHandler}) {
                 <label>
                     Capacity:
                     <input
+                    className='margin-right-5'
                     onChange={changeNumber}
                     value={table.capacity}
                     type="number"
@@ -36,8 +37,10 @@ function TablesForm({table, setTable, submitHandler, cancelHandler}) {
                     >
                     </input>
                 </label>
-                <button type='submit'>Submit</button>
-                <button type='button' onClick={cancelHandler}>Cancel</button>
+                <div className='new-table-button-container'>
+                    <button className='table-button margin-right-5' type='submit'>Submit</button>
+                    <button className='table-button-done' type='button' onClick={cancelHandler}>Cancel</button>
+                </div>
             </form>
         </div>
      );
