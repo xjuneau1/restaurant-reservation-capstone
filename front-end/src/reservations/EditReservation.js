@@ -4,7 +4,7 @@ import { getReservation, updateReservation } from "../utils/api";
 import { formatAsDate } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationForm from "./ReservationForm";
-
+import "./reservation.css"
 function EditReservation() {
   const initFormData = {
     first_name: "",
@@ -61,7 +61,7 @@ function EditReservation() {
   }
 
   return (
-    <div>
+    <div className="new-reservation-container">
       <h2>Edit a reservation:</h2>
       <ErrorAlert error={error} />
       <ReservationForm
