@@ -29,7 +29,9 @@ function NewTables() {
       };
 
     return ( 
-        <div>
+        <div className='new-table-container'>
+            <h4>Create a new table:</h4>
+            <br></br>
             <ErrorAlert error={tablesError} />
             <TablesForm 
                 submitHandler={submitHandler}
