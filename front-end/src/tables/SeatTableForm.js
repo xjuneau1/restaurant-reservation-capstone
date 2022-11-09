@@ -16,8 +16,8 @@ function SeatTableForm({
     setTableData({ [target.name]: target.value });
   };
   return (
-    <div className="margin-10">
-      <form className="seat-form" onSubmit={submitHandler}>
+    <div className="seat-form margin-10">
+      <form className="" onSubmit={submitHandler}>
         <div>
           <label className="margin-right-5">Select Table:</label>
           <select
@@ -38,6 +38,7 @@ function SeatTableForm({
             ))}
           </select>
         </div>
+        <div className="table-row">
         <button className="table-button margin-right-5" type="submit">
           Submit
           <FontAwesomeIcon
@@ -53,6 +54,7 @@ function SeatTableForm({
           <FontAwesomeIcon className="margin-right-5" icon={faArrowLeft} />
           Cancel
         </button>
+        </div>
       </form>
     </div>
   );

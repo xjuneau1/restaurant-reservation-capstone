@@ -53,7 +53,10 @@ function TablesInfo({ table, setError, index }) {
         </div>
           
         </div>
-        <div className="table-data">
+        
+      </div>
+      <div className="table-row">
+      <div className="table-data">
           {currentTable.reservation_id ? (
             <button
               type="submit"
