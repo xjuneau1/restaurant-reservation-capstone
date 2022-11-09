@@ -136,7 +136,7 @@ function hasValidPropertyValue(req, res, next) {
 
   const currentDate = new Date();
   const reservationDate = new Date(`${reservation_date} ${reservation_time}`);
-  console.log(reservationDate)
+  //console.log(reservationDate)
   if (currentDate.valueOf() > reservationDate.valueOf()) {
     next({
       status: 400,
