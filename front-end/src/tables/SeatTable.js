@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listTables, updateSeat, getReservation } from "../utils/api";
 import { useLocation, useHistory, useParams } from "react-router-dom";
+
 import SeatTableForm from "./SeatTableForm";
 import ErrorAlert from "../layout/ErrorAlert";
 import "./tables.css";

@@ -1,8 +1,17 @@
 import React from "react";
-import "./reservation.css"
-function ReservationForm({submitHandler, cancelHandler, reservation, setReservation}) {
-  
-  
+import "./reservation.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeft,
+  faArrowUpFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
+
+function ReservationForm({
+  submitHandler,
+  cancelHandler,
+  reservation,
+  setReservation,
+}) {
   const changeHandler = ({ target }) => {
     setReservation({ ...reservation, [target.name]: target.value });
   };
@@ -90,8 +99,23 @@ function ReservationForm({submitHandler, cancelHandler, reservation, setReservat
             required
           />
         </label>
-        <button className="reservation-button margin-right-5" type="submit">Submit</button>
-        <button className="reservation-button-cancel" type="button" onClick={cancelHandler}>Cancel</button>
+        <div className="flex-center">
+          <button className="reservation-button margin-right-5" type="submit">
+            Submit{" "}
+            <FontAwesomeIcon
+              className="margin-left-5"
+              icon={faArrowUpFromBracket}
+            />
+          </button>
+          <button
+            className="reservation-button-cancel"
+            type="button"
+            onClick={cancelHandler}
+          >
+            <FontAwesomeIcon className="margin-right-5" icon={faArrowLeft} />{" "}
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
