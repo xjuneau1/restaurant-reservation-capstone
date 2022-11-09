@@ -228,7 +228,7 @@ module.exports = {
     asyncErrorBoundary(isValidId),
     statusNotUnknown,
     statusNotFinished,
-    updateStatus,
+    asyncErrorBoundary(updateStatus),
   ],
   updateReservation: [
     asyncErrorBoundary(isValidId),
@@ -239,6 +239,6 @@ module.exports = {
     bodyDataHas("reservation_time"),
     hasValidProperties,
     hasValidPropertyValue,
-    updateReservation,
+    asyncErrorBoundary(updateReservation),
   ],
 };
