@@ -27,7 +27,7 @@ function Dashboard({ todaysDate }) {
   useEffect(() => {
     history.push(`/dashboard?date=${todaysDate}`);
     loadDashboard();
-  }, [todaysDate]);
+  }, [todaysDate, reservations]);
 
   const { search } = useLocation();
 
