@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { finishTableReservation, updateReservationStatus } from "../utils/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./tables.css";
+
 function TablesInfo({ table, setError, index }) {
   const [currentTable, setCurrentTable] = useState(table);
   const history = useHistory();
@@ -37,8 +40,18 @@ function TablesInfo({ table, setError, index }) {
       </div>
       <div className="table-row-1">
         <div className="table-data">Reservation ID: {currentTable.reservation_id}</div>
-        <div className="table-data" data-table-id-status={`${table.table_id}`}>
-          Status:{currentTable.reservation_id ? "occupied" : "free"}
+        <div className="status-container" data-table-id-status={`${table.table_id}`}>
+          Status:
+          <div
+          className={
+            currentTable.reservation_id
+              ? "status-done"
+              : "status-booked"
+          }
+        >
+          {currentTable.reservation_id ? "occupied" : "free"}
+        </div>
+          
         </div>
         <div className="table-data">
           {currentTable.reservation_id ? (
@@ -50,6 +63,7 @@ function TablesInfo({ table, setError, index }) {
               className="table-button-done"
             >
               Finish
+              <FontAwesomeIcon className="margin-left-5" icon={faCheck} />
             </button>
           ) : (
             <></>

@@ -1,13 +1,20 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { updateReservationStatus } from "../utils/api";
-import "./reservation.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPenToSquare,
+  faX,
+  faArrowUpFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import "./reservation.css";
+
 function ReservationCard({ reservation, loadReservations, setError, index }) {
-  const history = useHistory()
+  const history = useHistory();
   const handleCancelReservation = async (event) => {
     event.preventDefault();
     try {
-      setError(null)
+      setError(null);
       const abortController = new AbortController();
       if (
         window.confirm(
@@ -19,7 +26,7 @@ function ReservationCard({ reservation, loadReservations, setError, index }) {
           reservation.reservation_id,
           abortController.signal
         );
-        history.go()
+        history.go();
         //loadReservations();
         return () => abortController.abort();
       }
@@ -30,73 +37,106 @@ function ReservationCard({ reservation, loadReservations, setError, index }) {
 
   return (
     <div className="reservation-card" key={index}>
-
-      <div className="res-id reservation-data">id:{reservation.reservation_id}</div>
+      <div className="res-id reservation-data">
+        id:{reservation.reservation_id}
+      </div>
 
       <div className="reservation-row">
-        <div className="reservation-data">Name: {reservation.first_name} {reservation.last_name}</div>
+        <div className="reservation-data">
+          Name: {reservation.first_name} {reservation.last_name}
+        </div>
         <div className="reservation-data">Party Size: {reservation.people}</div>
       </div>
 
       <div className="reservation-row-1">
-        <div className="reservation-data">Phone: {reservation.mobile_number}</div>
-        <div className="reservation-data">Date: {reservation.reservation_date}</div>
-        <div className="reservation-data">Time: {reservation.reservation_time}</div>
+        <div className="reservation-data">
+          Phone: {reservation.mobile_number}
+        </div>
+        <div className="reservation-data">
+          Date: {reservation.reservation_date}
+        </div>
+        <div className="reservation-data">
+          Time: {reservation.reservation_time}
+        </div>
       </div>
 
-      <div className="reservation-status" data-reservation-id-status={reservation.reservation_id}>
-        Status: <div className={reservation.status === "booked" ? "reservation-status-booked" : "reservation-status-done"}>{reservation.status}</div>
+      <div
+        className="reservation-status"
+        data-reservation-id-status={reservation.reservation_id}
+      >
+        Status:{" "}
+        <div
+          className={
+            reservation.status === "booked"
+              ? "reservation-status-booked"
+              : "reservation-status-done"
+          }
+        >
+          {reservation.status}
+        </div>
       </div>
 
       <div className="reservation-row-2">
-      <div>
-        {reservation.status === "booked" ? (
-          <Link to={`/reservations/${reservation.reservation_id}/seat`}>
-            <button
-              type="button"
-              href={`/reservations/${reservation.reservation_id}/seat`}
-              value={`${reservation.reservation_id}`}
-              className="reservation-button"
-            >
-              Seat
-            </button>
-          </Link>
-        ) : (
-          <></>
-        )}
-      </div>
-      <div>
+        <div>
+          {reservation.status === "booked" ? (
+            <Link to={`/reservations/${reservation.reservation_id}/seat`}>
+              <button
+                type="button"
+                href={`/reservations/${reservation.reservation_id}/seat`}
+                value={`${reservation.reservation_id}`}
+                className="reservation-button"
+              >
+                Seat
+                <FontAwesomeIcon
+                  className="margin-left-5"
+                  icon={faArrowUpFromBracket}
+                />
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          {reservation.status !== "finished" &&
+          reservation.status !== "cancelled" ? (
+            <Link to={`/reservations/${reservation.reservation_id}/edit`}>
+              <button
+                type="button"
+                href={`/reservations/${reservation.reservation_id}/edit`}
+                value={`${reservation.reservation_id}`}
+                className="reservation-button"
+              >
+                Edit
+                <FontAwesomeIcon
+                  className="margin-left-5"
+                  icon={faPenToSquare}
+                />
+              </button>
+            </Link>
+          ) : (
+            <></>
+          )}
+        </div>
         {reservation.status !== "finished" &&
         reservation.status !== "cancelled" ? (
-          <Link to={`/reservations/${reservation.reservation_id}/edit`}>
+          <div>
             <button
               type="button"
-              href={`/reservations/${reservation.reservation_id}/edit`}
-              value={`${reservation.reservation_id}`}
-              className="reservation-button"
+              data-reservation-id-cancel={`${reservation.reservation_id}`}
+              onClick={handleCancelReservation}
+              className="reservation-button-cancel"
             >
-              Edit
+              <FontAwesomeIcon
+                  className="margin-right-5"
+                  icon={faX}
+                />
+              Cancel
             </button>
-          </Link>
+          </div>
         ) : (
           <></>
         )}
-      </div>
-      {reservation.status !== "finished" &&
-      reservation.status !== "cancelled" ? (
-        <div>
-          <button
-            type="button"
-            data-reservation-id-cancel={`${reservation.reservation_id}`}
-            onClick={handleCancelReservation}
-            className="reservation-button-cancel"
-          >
-            Cancel
-          </button>
-        </div>
-      ) : (
-        <></>
-      )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import {createTable} from "../utils/api"
 import ErrorAlert from '../layout/ErrorAlert';
 import TablesForm from './TablesForm';
 
+
 function NewTables() {
     const initTable = {
         "table_name": "",
@@ -32,6 +33,7 @@ function NewTables() {
         <div className='new-table-container'>
             <h4>Create a new table:</h4>
             <br></br>
+            
             <ErrorAlert error={tablesError} />
             <TablesForm 
                 submitHandler={submitHandler}

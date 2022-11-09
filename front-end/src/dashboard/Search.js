@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ErrorAlert from "../layout/ErrorAlert";
 import { listReservations } from "../utils/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import ReservationCard from "../reservations/ReservationCard";
-import "./search.css"
+import "./search.css";
+
 function Search() {
   const initFormData = {
     mobile_number: "",
@@ -67,7 +70,10 @@ function Search() {
             required={true}
             className="search-input"
           ></input>
-          <button className="search-button" type="submit">Find</button>
+          <button className="search-button" type="submit">
+            Find
+            <FontAwesomeIcon className="margin-left-5" icon={faArrowRight} />
+          </button>
         </form>
       </div>
       {clicked && reservations.length <= 0 ? (
@@ -76,21 +82,21 @@ function Search() {
         <></>
       )}
       <div className="reservations-container">
-      {reservations.length >= 1 ? (
-        <div>
-          {reservations.map((reservation) => (
-            <ReservationCard
-              key={reservation.reservation_id}
-              setError={setError}
-              index={reservation.reservation_id}
-              loadReservations={loadSearch}
-              reservation={reservation}
-            />
-          ))}
-        </div>
-      ) : (
-        <></>
-      )}
+        {reservations.length >= 1 ? (
+          <div>
+            {reservations.map((reservation) => (
+              <ReservationCard
+                key={reservation.reservation_id}
+                setError={setError}
+                index={reservation.reservation_id}
+                loadReservations={loadSearch}
+                reservation={reservation}
+              />
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

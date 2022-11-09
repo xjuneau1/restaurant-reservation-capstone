@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
 import { previous, next, today } from "../utils/date-time";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRight,
+  faArrowLeft,
+  faArrowDown,
+} from "@fortawesome/free-solid-svg-icons";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationCard from "../reservations/ReservationCard";
 import TablesInfo from "../tables/TablesInfo";
@@ -18,9 +24,9 @@ function Dashboard({ todaysDate }) {
   const [error, setError] = useState(null);
   const [tables, setTables] = useState([]);
   const history = useHistory();
-  useEffect(()=>{
-    history.push(`/dashboard?date=${todaysDate}`)
-    loadDashboard()
+  useEffect(() => {
+    history.push(`/dashboard?date=${todaysDate}`);
+    loadDashboard();
   }, [todaysDate]);
 
   const { search } = useLocation();
@@ -75,9 +81,18 @@ function Dashboard({ todaysDate }) {
     <main>
       <h1>Dashboard</h1>
       <div className="buttons-container">
-        <button className="btn-el" onClick={previousHandler}>Previous</button>
-        <button className="btn-el" onClick={todayHandler}>Today</button>
-        <button className="btn-el" onClick={nextHandler}>Next</button>
+        <button className="btn-el" onClick={previousHandler}>
+          <FontAwesomeIcon className="margin-right-5" icon={faArrowLeft} />
+          Previous
+        </button>
+        <button className="btn-el" onClick={todayHandler}>
+          Today
+          <FontAwesomeIcon className="margin-left-5" icon={faArrowDown} />
+        </button>
+        <button className="btn-el" onClick={nextHandler}>
+          Next
+          <FontAwesomeIcon className="margin-left-5" icon={faArrowRight} />
+        </button>
       </div>
       <div className="reservations-container">
         <h4>Reservations List:</h4>
