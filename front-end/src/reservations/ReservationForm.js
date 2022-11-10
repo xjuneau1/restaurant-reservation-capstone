@@ -53,7 +53,8 @@ function ReservationForm({
             onChange={changeHandler}
             value={reservation.mobile_number}
             placeholder="XXX-XXX-XXXX"
-            type="number"
+            type="tel"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             id="mobile_number"
             name="mobile_number"
             required
